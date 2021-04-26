@@ -5,10 +5,15 @@ const connection = mysql.createConnection(dbconfig)
 
 const app = express();
 
-// configuration =====================
-app.set('port', process.env.PORT || 3000);
+// html, css 연결
+var path = require('path');
+app.use(express.static('route'));
+
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
+
+// configuration =====================
+app.set('port', process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
     // 왜 ./views/home.html일 때는 안되는걸까?
